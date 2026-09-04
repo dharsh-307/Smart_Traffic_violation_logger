@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Add Traffic Violation</h2>
+
+<form method="POST">
+
+    <div class="mb-3">
+        <label class="form-label">Vehicle Number</label>
+        <input
+            type="text"
+            name="vehicle_number"
+            class="form-control"
+            placeholder="Example: TN38AB1234"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Violation Type</label>
+
+        <select name="violation_type" class="form-select" required>
+            <option value="">Select Violation</option>
+            <option value="No Helmet">No Helmet</option>
+            <option value="Overspeeding">Overspeeding</option>
+            <option value="Signal Jump">Signal Jump</option>
+            <option value="No Seat Belt">No Seat Belt</option>
+            <option value="Drunk Driving">Drunk Driving</option>
+            <option value="Driving Without License">
+                Driving Without License
+            </option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input
+            type="text"
+            name="location"
+            class="form-control"
+            placeholder="Enter violation location"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Date</label>
+        <input
+            type="date"
+            name="date"
+            class="form-control"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fine Amount (₹)</label>
+        <input
+            type="number"
+            name="fine_amount"
+            class="form-control"
+            min="0"
+            step="0.01"
+            placeholder="Enter fine amount"
+            required>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Add Violation
+    </button>
+
+    <a href="/" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>
+
+{% endblock %}

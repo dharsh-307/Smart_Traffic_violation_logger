@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-7">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-primary text-white text-center">
+                <h3>Traffic Violation Status</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="text-center mb-4">
+
+                    <h5>
+                        Challan #{{ violation.id }}
+                    </h5>
+
+                    <p class="text-muted">
+                        Public Verification Page
+                    </p>
+
+                </div>
+
+                <table class="table table-bordered">
+
+                    <tr>
+                        <th>Vehicle Number</th>
+                        <td>
+                            {{ violation.vehicle_number }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Violation</th>
+                        <td>
+                            {{ violation.violation_type }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Location</th>
+                        <td>
+                            {{ violation.location }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Date</th>
+                        <td>
+                            {{ violation.date }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Fine Amount</th>
+                        <td>
+                            ₹{{ violation.fine_amount }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Payment Status</th>
+
+                        <td>
+
+                            {% if violation.status == "Paid" %}
+
+                                <span class="badge bg-success fs-6">
+                                    ✓ PAID
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-danger fs-6">
+                                    ⚠ UNPAID
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <div class="alert alert-info text-center mt-4">
+
+                    This page displays the current
+                    payment status of the traffic violation.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

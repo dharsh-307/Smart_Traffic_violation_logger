@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-7">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-dark text-white text-center">
+                <h3>🚦 Traffic Violation Challan</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="text-center mb-4">
+                    <h5>Digital Challan Receipt</h5>
+                    <p class="text-muted">
+                        Challan ID: #{{ violation.id }}
+                    </p>
+                </div>
+
+                <table class="table table-bordered">
+
+                    <tr>
+                        <th>Vehicle Number</th>
+                        <td>
+                            {{ violation.vehicle_number }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Violation Type</th>
+                        <td>
+                            {{ violation.violation_type }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Location</th>
+                        <td>
+                            {{ violation.location }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Date</th>
+                        <td>
+                            {{ violation.date }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Fine Amount</th>
+                        <td>
+                            <strong>
+                                ₹{{ violation.fine_amount }}
+                            </strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Payment Status</th>
+                        <td>
+
+                            {% if violation.status == "Paid" %}
+
+                                <span class="badge bg-success">
+                                    PAID
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-danger">
+                                    UNPAID
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div class="text-center mt-4">
+
+                    <p class="text-muted">
+                        Scan the QR code to view the public status
+                    </p>
+
+                    <div id="qrcode"
+                         class="d-flex justify-content-center">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card-footer text-center">
+
+                <button
+                    onclick="window.print()"
+                    class="btn btn-primary">
+
+                    🖨️ Print Challan
+
+                </button>
+
+                <a
+                    href="/history"
+                    class="btn btn-secondary">
+
+                    Back to History
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js">
+</script>
+
+<script>
+
+    new QRCode(
+        document.getElementById("qrcode"),
+        {
+            text: "{{ url_for('public_status', violation_id=violation.id, _external=True) }}",
+            width: 180,
+            height: 180
+        }
+    );
+
+</script>
+
+{% endblock %}
